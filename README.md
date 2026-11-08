@@ -1,5 +1,7 @@
 # AffiliateCore SaaS — White-Label Multi-Tenant Affiliate Management Platform
 
+[![CI](https://github.com/marchikx/affiliate-core-saas/actions/workflows/ci.yml/badge.svg)](https://github.com/marchikx/affiliate-core-saas/actions/workflows/ci.yml) ![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)
+
 **Version:** 1.0.0  
 **Stack:** Laravel 11 · PHP 8.2+ · Vue 3 · Inertia.js · Tailwind CSS  
 **Architecture:** Zero-Dependency, Single-Database Multi-Tenant  
