@@ -16,7 +16,7 @@
 
 **Who it is for:** Agencies and SaaS resellers selling affiliate tooling to clients on shared hosting — not teams that already run a custom Node/Redis stack.
 
-AffiliateCore SaaS is a production-ready, white-label affiliate marketing platform designed for B2B resale. It provides your clients with a complete affiliate management system — tracking links, click analytics, automated commission calculations, and PayPal mass payouts — all within a stunning dark-themed Enterprise UI.
+AffiliateCore SaaS is a white-label affiliate marketing platform designed for B2B resale. It provides your clients with a complete affiliate management system — tracking links, click analytics, automated commission calculations, and PayPal mass payouts — all in a dark-themed admin UI.
 
 **Built to survive extreme low-resource cPanel shared hosting.** No WebSockets. No Node.js daemons. No Redis. No external API dependencies. Just PHP + MySQL + Cron.
 
@@ -167,6 +167,11 @@ make verify
 ```
 
 Runs `php -l` across all PHP sources under `app/`, `bootstrap/`, `database/`, and `routes/` (no database required).
+
+**Scope, stated plainly:** this is a syntax gate, not a behaviour test. There are no feature tests for tenant isolation or payouts yet. The money paths worth reviewing by hand:
+
+- `app/Http/Controllers/Api/PayoutController.php` — payout request: `DB::transaction` + `lockForUpdate()` on the user row, `bccomp`/`bcsub` at scale 4, minimum-payout check before the lock
+- `app/Http/Controllers/Api/TrackingController.php` — conversion: commission row and click update in one transaction
 
 ## License
 
